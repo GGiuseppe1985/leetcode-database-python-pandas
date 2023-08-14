@@ -1,0 +1,9 @@
+import pandas as pd
+
+def find_managers(employee: pd.DataFrame) -> pd.DataFrame:
+    result = employee.groupby('managerId') \
+            .agg(count=('managerId', 'count')) \
+            .merge(employee, left_on='managerId', right_on='id')
+    return result[result['count'] >= 5][['name']]   
+        
+    
